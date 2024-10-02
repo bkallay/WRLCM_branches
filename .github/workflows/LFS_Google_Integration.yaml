@@ -73,6 +73,7 @@ jobs:
 
           #find the branch in the body and switch 
           BRANCH=$(echo "$ISSUE_BODY" | grep -oP '(?<=BRANCH:)[^\s]+')
+          echo "Branch found: $BRANCH"
           git switch "$BRANCH"
 
           #when a file is moved we need to remove the existing .lfs file
