@@ -71,7 +71,7 @@ jobs:
           FILE_PATH=$(echo "$ISSUE_BODY" | grep -oP '(?<=FILE_PATH:)[^\s]+')
           echo "FILE_PATH=$FILE_PATH" >> $GITHUB_ENV
 
-          #find the branch in the body and switch to it
+          #find the branch in the body and switch 
           BRANCH=$(echo "$ISSUE_BODY" | grep -oP '(?<=BRANCH:)[^\s]+')
           git switch "$BRANCH"
 
