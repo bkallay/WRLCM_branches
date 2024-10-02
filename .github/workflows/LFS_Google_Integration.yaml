@@ -71,6 +71,11 @@ jobs:
           FILE_PATH=$(echo "$ISSUE_BODY" | grep -oP '(?<=FILE_PATH:)[^\s]+')
           echo "FILE_PATH=$FILE_PATH" >> $GITHUB_ENV
 
+          #find the branch in the body and switch 
+          BRANCH=$(echo "$ISSUE_BODY" | grep -oP '(?<=BRANCH:)[^\s]+')
+          echo "Branch found: $BRANCH"
+          git switch "$BRANCH"
+
           #when a file is moved we need to remove the existing .lfs file
           #so the previous path is included in the metadata on a move operation
           if [ $OPERATION = "MOVE" ]; then
