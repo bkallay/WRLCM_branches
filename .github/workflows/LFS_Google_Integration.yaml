@@ -56,7 +56,6 @@ jobs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git fetch --all
 
     - name: Set up environment
       run: |
@@ -74,6 +73,7 @@ jobs:
           #find the branch in the body and switch 
           BRANCH=$(echo "$ISSUE_BODY" | grep -oP '(?<=BRANCH:)[^\s]+')
           echo "Branch found: $BRANCH"
+          git fetch --all
           git switch "$BRANCH"
 
           #when a file is moved we need to remove the existing .lfs file
