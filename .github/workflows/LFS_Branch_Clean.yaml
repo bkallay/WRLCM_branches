@@ -1,0 +1,23 @@
+name: Branch Created
+
+# Trigger this action when a branch is created
+on:
+  create:
+    branches:
+      - '*'  # Listens to any branch creation
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Log branch creation
+        run: |
+          echo "Branch '${{ github.ref_name }}' has been created."
+          
+      - name: Perform additional actions
+        run: |
+          # Add any custom steps you want to execute when a branch is created
+          echo "You can perform additional tasks here."
