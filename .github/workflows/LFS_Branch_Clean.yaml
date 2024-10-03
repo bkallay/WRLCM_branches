@@ -15,5 +15,10 @@ jobs:
 
       - name: Clean LFS folders
         run: |
+          git fetch --all
+          git switch ${{ github.ref_name }}
           find data -type f -exec rm -f {} +
+          git add .
+          git commit -m 'LFS cleanup'
+          git push
           
