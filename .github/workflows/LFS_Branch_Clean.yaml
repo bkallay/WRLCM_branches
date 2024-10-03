@@ -21,7 +21,11 @@ jobs:
         run: |
           echo "Branch '${{ github.ref_name }}' has been created."
           
-      - name: Perform additional actions
+      - name: Perform LFS cleanup
         run: |
-          # Add any custom steps you want to execute when a branch is created
-          echo "You can perform additional tasks here."
+          git fetch --all
+          git switch ${{ github.ref_name }}
+          find data -type f -exec rm -f {} +
+          git add .
+          git commit -m 'LFS cleanup'
+          git push
