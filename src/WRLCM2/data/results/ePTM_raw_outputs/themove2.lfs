@@ -1,0 +1,42 @@
+OPERATION:CREATE
+DATE:Tue Sep 03 2024 08:39:33 GMT-0700 (Pacific Daylight Time)
+SIZE:1024
+FILE_PATH:data/results/ePTM_raw_outputs/theadd
+FILE_ID: 1cpiR4BZM0RdkGZGBIzSw6PTLaVgdmzzER0zSMSbXT2g
+FILE_URL: https://docs.google.com/document/d/1cpiR4BZM0RdkGZGBIzSw6PTLaVgdmzzER0zSMSbXT2g/edit?usp=drivesdk
+OWNER: Brian Kallay
+
+OPERATION:MOVE
+DATE:Tue Sep 03 2024 08:40:50 GMT-0700 (Pacific Daylight Time)
+SIZE:1024
+FILE_PATH:data/results/ePTM_raw_outputs/themove
+FILE_ID: 1cpiR4BZM0RdkGZGBIzSw6PTLaVgdmzzER0zSMSbXT2g
+FILE_URL: https://docs.google.com/document/d/1cpiR4BZM0RdkGZGBIzSw6PTLaVgdmzzER0zSMSbXT2g/edit?usp=drivesdk
+OWNER: Brian Kallay
+PREVIOUS_PATH:data/results/ePTM_raw_outputs/theadd
+
+OPERATION:UPDATE
+DATE:Tue Sep 03 2024 08:40:54 GMT-0700 (Pacific Daylight Time)
+SIZE:1024
+FILE_PATH:data/results/ePTM_raw_outputs/themove
+FILE_ID: 1cpiR4BZM0RdkGZGBIzSw6PTLaVgdmzzER0zSMSbXT2g
+FILE_URL: https://docs.google.com/document/d/1cpiR4BZM0RdkGZGBIzSw6PTLaVgdmzzER0zSMSbXT2g/edit?usp=drivesdk
+OWNER: Brian Kallay
+
+OPERATION:MOVE
+DATE:Tue Sep 03 2024 08:44:39 GMT-0700 (Pacific Daylight Time)
+SIZE:1024
+FILE_PATH:data/results/ePTM_raw_outputs/themove2
+FILE_ID: 1cpiR4BZM0RdkGZGBIzSw6PTLaVgdmzzER0zSMSbXT2g
+FILE_URL: https://docs.google.com/document/d/1cpiR4BZM0RdkGZGBIzSw6PTLaVgdmzzER0zSMSbXT2g/edit?usp=drivesdk
+OWNER: Brian Kallay
+PREVIOUS_PATH:data/results/ePTM_raw_outputs/themove
+
+OPERATION:UPDATE
+DATE:Tue Sep 03 2024 08:44:34 GMT-0700 (Pacific Daylight Time)
+SIZE:1024
+FILE_PATH:data/results/ePTM_raw_outputs/themove2
+FILE_ID: 1cpiR4BZM0RdkGZGBIzSw6PTLaVgdmzzER0zSMSbXT2g
+FILE_URL: https://docs.google.com/document/d/1cpiR4BZM0RdkGZGBIzSw6PTLaVgdmzzER0zSMSbXT2g/edit?usp=drivesdk
+OWNER: Brian Kallay
+

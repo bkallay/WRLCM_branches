@@ -1,0 +1,17 @@
+OPERATION:CREATE
+DATE:Sat Aug 31 2024 07:13:41 GMT-0700 (Pacific Daylight Time)
+SIZE:0
+FILE_PATH:data/results/ePTM_preprocessing/file11.txt
+FILE_ID: 1GHV1KmeGDWSXoZUs6bkiKe0BPqz0FZBf
+FILE_URL: https://drive.google.com/file/d/1GHV1KmeGDWSXoZUs6bkiKe0BPqz0FZBf/view?usp=drivesdk
+OWNER: Brian Kallay
+
+OPERATION:MOVE
+DATE:Tue Sep 03 2024 17:14:35 GMT-0700 (Pacific Daylight Time)
+SIZE:0
+FILE_PATH:data/results/ePTM_preprocessing/f11.txt
+FILE_ID: 1GHV1KmeGDWSXoZUs6bkiKe0BPqz0FZBf
+FILE_URL: https://drive.google.com/file/d/1GHV1KmeGDWSXoZUs6bkiKe0BPqz0FZBf/view?usp=drivesdk
+OWNER: Brian Kallay
+PREVIOUS_PATH:data/results/ePTM_preprocessing/file11.txt
+

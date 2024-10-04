@@ -1,0 +1,25 @@
+OPERATION:CREATE
+DATE:Tue Sep 03 2024 08:34:12 GMT-0700 (Pacific Daylight Time)
+SIZE:1024
+FILE_PATH:data/results/ePTM_raw_outputs/addit
+FILE_ID: 1Ut-3jL_vXIDB-n4noLrmskEm4JqRKyAJNzjQ_7-XELg
+FILE_URL: https://docs.google.com/document/d/1Ut-3jL_vXIDB-n4noLrmskEm4JqRKyAJNzjQ_7-XELg/edit?usp=drivesdk
+OWNER: Brian Kallay
+
+OPERATION:MOVE
+DATE:Tue Sep 03 2024 08:34:45 GMT-0700 (Pacific Daylight Time)
+SIZE:1024
+FILE_PATH:data/results/ePTM_raw_outputs/moveit
+FILE_ID: 1Ut-3jL_vXIDB-n4noLrmskEm4JqRKyAJNzjQ_7-XELg
+FILE_URL: https://docs.google.com/document/d/1Ut-3jL_vXIDB-n4noLrmskEm4JqRKyAJNzjQ_7-XELg/edit?usp=drivesdk
+OWNER: Brian Kallay
+PREVIOUS_PATH:data/results/ePTM_raw_outputs/addit
+
+OPERATION:UPDATE
+DATE:Tue Sep 03 2024 08:34:48 GMT-0700 (Pacific Daylight Time)
+SIZE:1024
+FILE_PATH:data/results/ePTM_raw_outputs/moveit
+FILE_ID: 1Ut-3jL_vXIDB-n4noLrmskEm4JqRKyAJNzjQ_7-XELg
+FILE_URL: https://docs.google.com/document/d/1Ut-3jL_vXIDB-n4noLrmskEm4JqRKyAJNzjQ_7-XELg/edit?usp=drivesdk
+OWNER: Brian Kallay
+
