@@ -1,0 +1,123 @@
+# Description: This GitHub action provides the driver for the  GitHub portion of the LCM 
+# Large File Storage (LFS) Solution.
+# 
+# The action is triggered when a new issue is opened. If the issue contains the string
+# "LARGE FILE STORAGE" in the title it indicates that a file operation was performed on the 
+# Google LFS folder. The body of a LFS issue contains the following data:
+#
+#    OPERATION: CREATE, UPDATE, MOVE or DELETE
+#    DATE: Timestamp of the operation
+#    SIZE: File size (Bytes)
+#    FIEL_PATH: Relative directory path (from repository root)
+#    FILE_ID: Google drive file id
+#    FILE_URL: Google drive file URL
+#    OWNER: Google drive file owner
+#    PREVIOUS_NAME: Previous file name (only on move)
+# 
+# The OPERATION value determines what path the action takes. Each path is isolated in a
+# bash script in the .github/scripts directory.
+#
+# Valid Operations & results:
+#
+#  CREATE: New file added to Google drive. This results in the creation of a .lfs file 
+#    with the contents of the issue body, which contains file metadata. The file
+#    name is also added to .gitignore.
+#
+#  UPDATE: Existing file has been edited. Tis results in the update of the existing .lfs
+#    file with the appending of the issue body.
+#
+#  MOVE: Existing file has been moved (or renamed). This results in the creation of a .lfs
+#    file with the new name/path as well as the contents of the old .lfs file. The old .lfs 
+#    file is deleted. The .gitignore file is also updated by removing the old file name and
+#    adding the new one.
+# 
+#  DELETE: Existing file has been deleted. This results in the deletion of the .lfs file.
+#    The file name is also removed from .gitignore.
+#
+# *NOTE: This Google Drive/GitHub LFS integration requires an identical folder structure 
+#       in the repository and the Google drive.
+
+name: LFS_Google_Integration_V2
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process_lfs_issue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+   
+    - name: Set up environment
+      run: |
+        ISSUE_TITLE="${{ github.event.issue.title }}"
+        #Only process issues that have LARGE FILE STORAGE in the title
+        if echo "$ISSUE_TITLE" | grep -iq "LARGE FILE STORAGE"; then
+          ISSUE_BODY="${{ github.event.issue.body }}"
+          OPERATION=$(echo "$ISSUE_BODY" | grep -oP '(?<=OPERATION:)[^\s]+')
+          echo "OPERATION=$OPERATION" >> $GITHUB_ENV
+          echo "${{ github.event.issue.body }}" > issue_body.txt
+          echo "BODY=issue_body.txt" >> $GITHUB_ENV
+          FILE_PATH=$(echo "$ISSUE_BODY" | grep -oP '(?<=FILE_PATH:)[^\s]+')
+          echo "FILE_PATH=$FILE_PATH" >> $GITHUB_ENV
+
+          #when a file is moved we need to remove the existing .lfs file
+          #so the previous path is included in the metadata on a move operation
+          if [ $OPERATION = "MOVE" ]; then
+            PREVIOUS_PATH=$(echo "$ISSUE_BODY" | grep -oP '(?<=PREVIOUS_PATH:)[^\s]+')
+            echo "PREVIOUS_PATH=$PREVIOUS_PATH" >> $GITHUB_ENV
+          fi
+        else
+          echo "No Large File operation"
+          echo "OPERATION=NO-OP" >> $GITHUB_ENV
+        fi
+
+    - name: Run create lfs
+      if: env.OPERATION == 'CREATE'
+      run: .github/scripts/create_lfs.sh "$FILE_PATH" "$BODY_FILE" "$ISSUE_NUMBER" "$ISSUE_TITLE"
+      env:
+          FILE_PATH: "${{ env.FILE_PATH }}"          
+          ISSUE_NUMBER: "${{ github.event.issue.number }}"
+          ISSUE_TITLE: "${{ github.event.issue.title }}"
+          BODY_FILE: "${{ env.BODY }}"
+      shell: bash
+
+    - name: Run move lfs
+      if: env.OPERATION == 'MOVE'
+      run: .github/scripts/move_lfs.sh "$FILE_PATH" "$BODY_FILE" "$ISSUE_NUMBER" "$ISSUE_TITLE" "$PREVIOUS_PATH"
+      env:
+          FILE_PATH: "${{ env.FILE_PATH }}"    
+          ISSUE_NUMBER: "${{ github.event.issue.number }}"
+          ISSUE_TITLE: "${{ github.event.issue.title }}"
+          BODY_FILE: "${{ env.BODY }}"
+          PREVIOUS_PATH: "${{ env.PREVIOUS_PATH }}"
+      shell: bash
+
+    - name: Run update lfs
+      if: env.OPERATION == 'UPDATE'
+      run: .github/scripts/update_lfs.sh "$FILE_PATH" "$BODY_FILE" "$ISSUE_NUMBER"
+      env:
+          FILE_PATH: "${{ env.FILE_PATH }}"          
+          ISSUE_NUMBER: "${{ github.event.issue.number }}"
+          BODY_FILE: "${{ env.BODY }}"
+      shell: bash
+      
+    - name: Run delete lfs
+      if: env.OPERATION == 'DELETE'
+      run: .github/scripts/delete_lfs.sh "$FILE_PATH" "$ISSUE_NUMBER" "$ISSUE_TITLE"
+      env:
+          FILE_PATH: "${{ env.FILE_PATH }}"          
+          ISSUE_NUMBER: "${{ github.event.issue.number }}"
+          ISSUE_TITLE: "${{ github.event.issue.title }}"
+      shell: bash    
+      
+    
